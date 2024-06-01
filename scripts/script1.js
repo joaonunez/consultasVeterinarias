@@ -92,7 +92,7 @@ class Consulta{
     
 }
 
-
+let consultas = [];
 
 
 let mascotas = [];
@@ -126,7 +126,7 @@ mascotas.push(new Mascota(27, 'Duke', 'Ave', 3, 'Agapornis', 'Valeria Rojas'));
 mascotas.push(new Mascota(28, 'Lola', 'Perro', 4, 'Labrador', 'Esteban Vargas'));
 mascotas.push(new Mascota(29, 'Nala', 'Gato', 1, 'Siamés', 'Andrea Castillo'));
 mascotas.push(new Mascota(30, 'Rex', 'Perro', 3, 'Beagle', 'Mauricio Paredes'));
-mascotas.push(new Mascota(30, 'Gabu', 'Perro', 12, 'Beagle', 'Mauricio Paredes'));
+mascotas.push(new Mascota(31, 'Gabu', 'Perro', 12, 'Beagle', 'Mauricio Paredes'));
 
 
 // Obtener el elemento select del DOM MASCOTAS
@@ -207,7 +207,25 @@ veterinarios.forEach(veterinario => {
     comboBox2.appendChild(optionElement);
 });
 
+//funcion que ingresa los datos en la tabla de registro:
+let mostrarConsultas = function() {
+    let tbody = document.getElementById('tablaConsultas').getElementsByTagName('tbody')[0];
+    tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
 
+    consultas.forEach(consulta => {
+        let row = tbody.insertRow();
+        row.insertCell(0).innerText = consulta.getId;
+        row.insertCell(1).innerText = consulta.getMascota;
+        row.insertCell(2).innerText = consulta.getVeterinario;
+        row.insertCell(3).innerText = consulta.getFecha;
+        row.insertCell(4).innerText = consulta.getDiagnostico;
+        row.insertCell(5).innerText = consulta.getTratamiento;
+        row.insertCell(6).innerText = consulta.getCosto;
+    });
+};
+
+//establecemos contador de la id de consulta
+let consultaIdCounter = 1;
 //recibimos los datosd desde el formulario en index.html
 let ingresarConsulta = function(){
     let id = document.getElementById('nombreMascota').value;
@@ -215,15 +233,46 @@ let ingresarConsulta = function(){
     let f = document.getElementById('fecha').value;
     let d = document.getElementById('diagnostico').value;
     let t = document.getElementById('tratamiento').value;
-    let mo = document.getElementById('monto').value;
+    let mo = parseFloat(document.getElementById('monto').value);
 
-    let mascotaSeleccionada = mascotas.find(mascota => mascota.getId === id);
+    console.log('ID de la mascota:', id);
+    console.log('ID del veterinario:', m);
+
+    let mascotaSeleccionada = mascotas.find(mascota => mascota.getId == id);
+    let veterinarioSeleccionado = veterinarios.find( veterinario => veterinario.getId == m );
+    console.log(mascotaSeleccionada);
+    console.log(veterinarioSeleccionado);
+
+    // Verificar que la mascota y el veterinario existan
+    if (mascotaSeleccionada && veterinarioSeleccionado) {
+        // Ajustar el monto según la edad de la mascota
+        if (mascotaSeleccionada.getEdad < 1) {
+            mo *= 0.85; // Aplicar un descuento del 15%
+        } else if (mascotaSeleccionada.getEdad > 10) {
+            mo *= 1.10; // Aplicar un aumento del 10%
+        }
+
+        // Crear una nueva consulta
+        let consulta = new Consulta(
+            consultaIdCounter, 
+            mascotaSeleccionada.getNombre, 
+            veterinarioSeleccionado.getNombre, 
+            f, 
+            d, 
+            t, 
+            mo
+        );
+
+        // Agregar la consulta a la lista de consultas
+        consultas.push(consulta);
+
+        // Incrementar el contador para la siguiente consulta
+        consultaIdCounter++;
+
+        console.log('Nueva consulta creada:', consulta);
+        mostrarConsultas();
+    } else {
+        console.error('Error: Mascota o veterinario no encontrado');
+    }
     
-    if(mascotaSeleccionada.getEdad < 1 ){
-        mo *= mo * 0.85;
-    }
-    else if(mascotaSeleccionada.getEdad > 10){
-        mo *= mo * 1.10;
-    }
-    let consulta = new Consulta()
 }
