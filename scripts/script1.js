@@ -92,8 +92,8 @@ class Consulta{
     
 }
 
-let consultas = [];
 
+let consultas = [];
 
 let mascotas = [];
 mascotas.push(new Mascota(1,'Zeus','Perro',0 , 'Dálmata', 'Ailin Macaya' ));
@@ -220,7 +220,7 @@ let mostrarConsultas = function() {
         row.insertCell(3).innerText = consulta.getFecha;
         row.insertCell(4).innerText = consulta.getDiagnostico;
         row.insertCell(5).innerText = consulta.getTratamiento;
-        row.insertCell(6).innerText = consulta.getCosto;
+        row.insertCell(6).innerText = "$ "+consulta.getCosto;
     });
 };
 
@@ -233,7 +233,7 @@ let ingresarConsulta = function(){
     let f = document.getElementById('fecha').value;
     let d = document.getElementById('diagnostico').value;
     let t = document.getElementById('tratamiento').value;
-    let mo = parseFloat(document.getElementById('monto').value);
+    let mo = parseInt(document.getElementById('monto').value);
 
     console.log('ID de la mascota:', id);
     console.log('ID del veterinario:', m);
@@ -248,8 +248,12 @@ let ingresarConsulta = function(){
         // Ajustar el monto según la edad de la mascota
         if (mascotaSeleccionada.getEdad < 1) {
             mo *= 0.85; // Aplicar un descuento del 15%
+            mo *= 900
         } else if (mascotaSeleccionada.getEdad > 10) {
             mo *= 1.10; // Aplicar un aumento del 10%
+            mo *= 900
+        } else{
+            mo *= 900
         }
 
         // Crear una nueva consulta
@@ -276,3 +280,33 @@ let ingresarConsulta = function(){
     }
     
 }
+
+let buscarConsulta = function(){
+    let buscarConsulta = document.getElementById('idConsultaSolicitada').value;
+    let consultaEncontrada = consultas.find(consulta => consulta.getId == buscarConsulta);
+    if(consultaEncontrada != undefined){
+        document.getElementById('infoId').innerText = consultaEncontrada.getId;
+        document.getElementById('infoMascota').innerText = consultaEncontrada.getMascota;
+        document.getElementById('infoVeterinario').innerText = consultaEncontrada.getVeterinario;
+        document.getElementById('infoFecha').innerText = consultaEncontrada.getFecha;
+        document.getElementById('infoId').innerText = consultaEncontrada.getId;
+        document.getElementById('infoDiagnostico').innerText = consultaEncontrada.getDiagnostico;
+        document.getElementById('infoTratamiento').innerText = consultaEncontrada.getTratamiento;
+        document.getElementById('infoCosto').innerText ="$ " + consultaEncontrada.getCosto +" CLP";
+
+
+
+
+    }else{
+        document.getElementById('infoId').innerText = '';
+        document.getElementById('infoMascota').innerText = '';
+        document.getElementById('infoVeterinario').innerText = '';
+        document.getElementById('infoFecha').innerText = '';
+        document.getElementById('infoId').innerText = '';
+        document.getElementById('infoDiagnostico').innerText = '';
+        document.getElementById('infoTratamiento').innerText = '';
+        document.getElementById('infoCosto').innerText = '';
+    }
+}
+
+document.getElementById('verConsultas').addEventListener('shown.bs.modal', buscarConsulta);
