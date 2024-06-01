@@ -89,6 +89,7 @@ class Consulta{
     get getCosto(){
         return this._costo;
     }
+    
 }
 
 
@@ -209,13 +210,20 @@ veterinarios.forEach(veterinario => {
 
 //recibimos los datosd desde el formulario en index.html
 let ingresarConsulta = function(){
-    let i = document.getElementById('nombreMascota').value;
+    let id = document.getElementById('nombreMascota').value;
     let m = document.getElementById('nombreMedico').value;
     let f = document.getElementById('fecha').value;
     let d = document.getElementById('diagnostico').value;
     let t = document.getElementById('tratamiento').value;
     let mo = document.getElementById('monto').value;
-    
 
-    let 
+    let mascotaSeleccionada = mascotas.find(mascota => mascota.getId === id);
+    
+    if(mascotaSeleccionada.getEdad < 1 ){
+        mo *= mo * 0.85;
+    }
+    else if(mascotaSeleccionada.getEdad > 10){
+        mo *= mo * 1.10;
+    }
+    let consulta = new Consulta()
 }
