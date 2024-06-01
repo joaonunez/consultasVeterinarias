@@ -105,52 +105,21 @@
     </div>
     <div class="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 text-center m-auto mb-5">
         <form>
-            <label for="monto" class="form-label">
+            <label for="idConsultaSolicitada" class="form-label">
                 <p class="fw-bold">Ingresa la ID de la consulta que deseas ver.</p>
             </label>
             <div class="form-floating mb-3 col-auto">
-                <input type="number" class="form-control" id="monto" placeholder="Ingresar monto base">
-                <label for="monto">Ingresar ID de Consulta</label>
+                <input type="number" class="form-control" id="idConsultaSolicitada" placeholder="Ingresar ID CONSULTA">
+                <label for="idConsultaSolicitada">Ingresar ID de Consulta</label>
             </div>
-            <input type="button" class="btn btn-info btn-lg fw-bold" value="Buscar Consulta" onclick="buscarConsulta()">
+            <input type="button" class="btn btn-info btn-lg fw-bold" value="Buscar Consulta" data-bs-toggle="modal"
+            data-bs-target="#verConsultas" onclick="">
         </form>
         
     </div>
 
 
-    <table id="tablaConsultaBuscada" class="table table-bordered table-striped custom-table mt-3 miTabla">
-        <tbody>
-            <tr>
-                <th>ID</th>
-                <td id="infoId"></td>
-            </tr>
-            <tr>
-                <th>Mascota</th>
-                <td id="infoMascota"></td>
-            </tr>
-            <tr>
-                <th>Veterinario</th>
-                <td id="infoVeterinario"></td>
-            </tr>
-            <tr>
-                <th>Fecha</th>
-                <td id="infoFecha" ></td>
-            </tr>
-            <tr>
-                <th>Diagnostico</th>
-                <td id="infoDiagnostico"></td>
-            </tr>
-            <tr>
-                <th>Tratamiento</th>
-                <td id="infoTratamiento"></td>
-            </tr>
-            <tr>
-                <th>Costo</th>
-                <td id="infoCosto"></td>
-            </tr>
-            
-        </tbody>
-    </table>
+    
 
 
 
@@ -198,6 +167,57 @@
         </div>
     </div>
 
+
+    <div class="modal fade modal-lg" id="verConsultas" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Mostrando Consulta Solicitada</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body miTabla">
+                    <table id="tablaConsultaBuscada" class="table table-bordered table-striped custom-table mt-3 miTabla">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <td id="infoId"></td>
+                            </tr>
+                            <tr>
+                                <th>Mascota</th>
+                                <td id="infoMascota"></td>
+                            </tr>
+                            <tr>
+                                <th>Veterinario</th>
+                                <td id="infoVeterinario"></td>
+                            </tr>
+                            <tr>
+                                <th>Fecha</th>
+                                <td id="infoFecha" ></td>
+                            </tr>
+                            <tr>
+                                <th>Diagnostico</th>
+                                <td id="infoDiagnostico"></td>
+                            </tr>
+                            <tr>
+                                <th>Tratamiento</th>
+                                <td id="infoTratamiento"></td>
+                            </tr>
+                            <tr>
+                                <th>Costo</th>
+                                <td id="infoCosto"></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
