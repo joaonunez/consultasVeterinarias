@@ -9,3 +9,8 @@
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
+
+.miTabla {
+    overflow-x: auto; /* Añadir desplazamiento horizontal */
+    white-space: nowrap; /* Evitar que el contenido se envuelva */
+}
