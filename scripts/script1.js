@@ -301,6 +301,7 @@ let buscarConsulta = function(){
 
 
     }else{
+        alert('SE HA INGRESADO UN ID NO EXISTENTE');
         document.getElementById('infoId').innerText = '';
         document.getElementById('infoMascota').innerText = '';
         document.getElementById('infoVeterinario').innerText = '';
@@ -309,9 +310,10 @@ let buscarConsulta = function(){
         document.getElementById('infoDiagnostico').innerText = '';
         document.getElementById('infoTratamiento').innerText = '';
         document.getElementById('infoCosto').innerText = '';
+
     }
 }
 
-document.getElementById('verConsultas').addEventListener('shown.bs.modal', buscarConsulta);
+
 
 
