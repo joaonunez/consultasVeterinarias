@@ -228,6 +228,9 @@ let mostrarConsultas = function() {
 let consultaIdCounter = 1;
 //recibimos los datosd desde el formulario en index.html
 let ingresarConsulta = function(){
+
+  
+        
     let id = document.getElementById('nombreMascota').value;
     let m = document.getElementById('nombreMedico').value;
     let f = document.getElementById('fecha').value;
@@ -310,3 +313,5 @@ let buscarConsulta = function(){
 }
 
 document.getElementById('verConsultas').addEventListener('shown.bs.modal', buscarConsulta);
+
+
